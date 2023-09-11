@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
     <h1>유저리스트</h1>
     <table>
         <tr>
@@ -18,8 +20,12 @@
             <td th:text="${user.userid}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
-            <td th:text="${user.indate}"></td>
+            <td th:text="${#dates.format(user.indate, 'yy년 MM월 dd일 EEEE HH:mm:ss')}"></td>
+
         </tr>
     </table>
 </body>
+<script>
+    
+</script>
 </html>
