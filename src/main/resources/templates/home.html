@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
     <header th:replace="~{fragments/header :: headerFragment}"></header>
-    <h1>안녕홈이양</h1>
-    <p>헤더작업중</p>
-    <a href="/user/list">회원목록</a>
-    <a href="/user/signUp">회원가입</a>
+    <div class="wrap">
+        <div class="contents">
+            <h1>안녕홈이양</h1>
+            <p>헤더작업중</p>
+            <a href="/user/list">회원목록</a>
+            <a href="/user/signUp">회원가입</a>
+        </div>
+    </div>
 </body>
 </html>

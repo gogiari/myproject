@@ -1,159 +1,110 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <header class="header" th:fragment="headerFragment">
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        <link rel="stylesheet" href="/css/common.css">
         <link rel="stylesheet" href="/css/header.css">
-
-        <div style="order: 1;"></div>
-    <div class="headerCenter">
-        <div class="logo">
-            <img class="logobtn" style="grid-row: 1 / 3;" src="/image/ball2.png" alt="logo">
-            <span class="logobtn" style="color: white; font-size: 18px; font-weight: bold;">Green</span>
-            <span class="logobtn" style="color: white; font-size: 18px; font-weight: bold;">Sports</span>
-        </div>
-        <div class="menu">
-            <a href="/" style="float: left; margin: 0 20px;"><span>Home</span></a>
-            <div style="float: left; margin: 0 20px;">
-                <span class="comu" style="cursor: pointer;">Community</span>
-                <div class="comuMenus" style="display: none;">
-                    <c:forEach var="menu" items="${ menuList }">
-                            <span onclick="window.location.href='/board/list?menu_id=${menu.menu_id}'" class="anyMenuList" style="cursor: pointer;">${menu.menu_name}</span>
-                    </c:forEach>
+        <div onclick="location.href='/'" class="logo">알바계산</div>
+        <div class="menus_wrap">
+            <div class="menus">
+                <span onclick="location.href='/'">홈</span>
+                <div style="position: relative;">
+                    <div class="commus">
+                        <span>게시판</span>
+                    </div>
+                    <div class="commu"></div>
                 </div>
+                <span>채팅</span>
             </div>
-            <span>News</span>
-            <span>Login</span>
+            <div class="login">
+                로그인
+            </div>
         </div>
-        <!-- 반응형 1024px 미만 환경시 -->
-        <div class="">
-            <div class="menuLogo">
-                <div id="sideBtn" style="height: 100%;">
-                    <box-icon id="hamberger" name='menu' color='white' size="lg" style="cursor: pointer;"></box-icon>
-                    <box-icon id="xBtn" name='x' color="white" size="lg"
-                        style="display: none; cursor: pointer;"></box-icon>
-                </div>
-                <div class="sideMenus" style="display: block;">
-                    <a href="/">
-                        <p>Home</p>
-                    </a>
-                    <div style="width: 180px;">
-                        <span class="sideComuBtn" style="white-space: nowrap;">Community</span>
-                        <box-icon class="downBtn" name='chevron-down' type='solid' color='#3cb371'></box-icon>
-                    </div>
-                    <div class="please">
-                        <c:forEach var="menu" items="${ menuList }">
-                            <p onclick="window.location.href='/board/list?menu_id=${menu.menu_id}'" class="sideComuMenus anyMenuList" style="white-space: nowrap;">${menu.menu_name}</p>
-                        </c:forEach>
-                    </div>
-                    <p class="other">News</p>
-                    <p class="other">Login</p>
 
+        <!-- 반응형 768px 미만 -->
+        <div class="hamberger_wrap">
+            <span class="llogin" onclick="location.href='/login'">로그인</span>
+            <div class="hamberger">
+                <box-icon id="ham" name='menu' color='white' size="lg" style="cursor: pointer;"></box-icon>
+                <box-icon class="side_xBtn" name='x' color="white" size="lg"></box-icon>
+            </div>
+            <div class="side_menus">
+                <div>
+                    <p>홈</p>
+                    <div style="display: flex;">
+                        <p class="side_board">게시판</p>
+                        <box-icon class="downBtn" name='chevron-down' size="lg" type='solid' color='var(--bagic-color)'></box-icon>
+                    </div>
+                    <div class="side_commu"></div>
+                    <p>채팅</p>
+                </div>
+                <div class="side_login">
+                    <p>로그인</p>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="menuOther"></div>
+        <div class="dark"></div>
 
-<script>
-    //로고 버튼 홈으로만들기
-    let logobtns = document.querySelectorAll('.logobtn');
-    logobtns.forEach(function (logobtn) {
-        logobtn.addEventListener("click", function () {
-            window.location.href = "/";
-        })
-    });
-    // 커뮤니티 메뉴 버튼 이벤트
-    document.querySelector('.comu').addEventListener("click", function () {
-        if (document.querySelector('.comuMenus').style.display == "block") {
-            document.querySelector('.comuMenus').style.display = "none";
-        } else if (document.querySelector('.comuMenus').style.display == "none") {
-            document.querySelector('.comuMenus').style.display = "block"
-        }
-    });
-    // 1024px 미만 버튼 이벤트(모바일)
-    // 햄버거클릭
-    document.querySelector("#hamberger").addEventListener("click", function () {
-        document.querySelector("#hamberger").style.display = "none";
-        document.querySelector("#xBtn").style.display = "block";
-        document.querySelector(".sideMenus").style.width = "200px";
-        document.querySelector(".menuOther").style.display = "block";
-        // document.querySelector(".sideMenus").style.display = "block";
-        // if(document.querySelector(".sideMenus").style.display == "block"){
-        //     document.querySelector(".sideMenus").style.width = "200px";
-        // }
-    });
-    // 엑스버튼 클릭
-    function CloseSideMenu() {
-        document.querySelector("#xBtn").style.display = "none";
-        document.querySelector("#hamberger").style.display = "block";
-        document.querySelector(".sideMenus").style.width = "0px";
-        document.querySelector(".menuOther").style.display = "none";
-        // if(document.querySelector(".sideMenus").style.width == "0px"){
-        //     document.querySelector(".sideMenus").style.display = "none";
-        // }
+        <!-- 헤더 스크립트 -->
+        <script>
+            // 메뉴 불러오기
+            fetch('http://localhost:8099/menu/list')
+                .then(resp => resp.json())
+                .then(result => {
+                    console.log(result);
+                    const commuDiv = document.querySelector('.commu');
+                    const sideCommuDiv = document.querySelector('.side_commu');
+                    result.forEach(menu => {
+                        const pElement = document.createElement('p');
+                        const pElement2 = document.createElement('p');
+                        pElement.textContent = menu.menuname;
+                        pElement2.textContent = menu.menuname;
+                        pElement.onclick = () => { location.href = `/board/${menu.menuid}`; };
+                        commuDiv.appendChild(pElement);
+                        sideCommuDiv.appendChild(pElement2);
+                    });
+                });
 
-    }
-    document.querySelector("#xBtn").addEventListener("click", function () {
-        CloseSideMenu();
-    });
+            // 햄버거 클릭시
+            document.querySelector('.hamberger').addEventListener('click', () => {
+                document.querySelector('.side_menus').classList.toggle('side_menus_toggle');
+                document.querySelector('.dark').classList.toggle('dark_on');
+                document.querySelector('#ham').classList.toggle('discomedown');
+                document.querySelector('.side_xBtn').classList.toggle('discomeon');
+            });
 
+            // 게시판 버튼 클릭시
+            document.querySelector('.commus').addEventListener('click', () => {
+                document.querySelector('.commu').classList.toggle('commu_toggle');
+            });
+            
+            // 어둡게 변하는 부분 클릭시(사이드메뉴 바깥)
+            document.querySelector('.dark').addEventListener('click', () => {
+                document.querySelector('.hamberger').click();
+                document.querySelector('.side_board').click();
+            });
+            
+            document.querySelector('.side_board').addEventListener('click', () => {
+                document.querySelector('.downBtn').classList.toggle('turnM180');
+                document.querySelector('.side_commu').classList.toggle('side_commu_toggle');
+                document.querySelector('.side_board').classList.toggle('side_board_toggle');
+            });
+            
+            // 모든 클릭
+            document.addEventListener('click', (e) => {
 
-    // 커뮤니티 다른데 클릭하면 메뉴 닫기
-    document.addEventListener("click", (event) => {
-        if (!document.querySelector('.comu').contains(event.target) &&
-            !document.querySelector('.comuMenus').contains(event.target)) {
-                document.querySelector('.comuMenus').style.display = "none";
-        }
-        // 사이드메뉴 커뮤니티 열린거 닫기
-        if(!document.querySelector('.sideMenus').contains(event.target)){
-            if(document.querySelector('.please').classList.contains('pleaseAct')){
-                document.querySelector('.please').classList.remove('pleaseAct');
-                document.querySelectorAll('.sideComuMenus').forEach(e => {
-                    e.classList.remove('sideComuMenusAct');
-        });
-            }
-        }
-    });
+            });
 
-    // 어두운 투명배경 클릭시 메뉴 닫기
-    document.querySelector('.menuOther').addEventListener("click", () => {
-        document.querySelector(".menuOther").style.opacity = "0.7";
-        CloseSideMenu();
-    });
-
-    // 마우스 휠 이벤트
-    document.addEventListener("scroll", () => {
-        CloseSideMenu();
-    });
-
-    // 사이드 커뮤니티 메뉴
-    document.querySelector('.sideComuBtn').addEventListener("click", () => {
-        // 커뮤니티 화살 위로변하기
-        // if(document.querySelector('.downBtn').style.transform == "rotate(-180deg)"){
-        //     document.querySelector('.downBtn').style.transform = "rotate(0deg)";
-        // } else {
-        //     document.querySelector('.downBtn').style.transform = "rotate(-180deg)";
-        // }
-        // toggle로 클래스가 추가되서 스타일이 바뀐다....
-        document.querySelector('.downBtn').classList.toggle('turn-180');
-        document.querySelector('.please').classList.toggle('pleaseAct');
-        document.querySelectorAll('.sideComuMenus').forEach(e => {
-            e.classList.toggle('sideComuMenusAct');
-        });
-
-    });
-    document.querySelectorAll('.sideComuMenus').forEach((comu, i) => {
-        comu.addEventListener("click", () => {
-            location.href("/");
-        });
-    });
-</script>
+        </script>
     </header>
 </body>
+
 </html>

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class UserController {
     @RequestMapping("/user/list")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("user/list");
-        List<UserEntity> userList = userRepository.findAll();
+        List<UserEntity> userList = userRepository.findAll(Sort.by(Sort.Direction.ASC, "indate"));
         // System.out.println(userList);
         mv.addObject("userList", userList);
         return mv;

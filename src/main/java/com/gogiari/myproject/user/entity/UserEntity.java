@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +26,7 @@ public class UserEntity {
     @Column(name = "USERID", length = 12, nullable = false)
     private String userid;
 
-     @Column(name = "PASSWD", length = 12, nullable = false)
+    @Column(name = "PASSWD", length = 12, nullable = false)
     private String password;
 
     @Column(name = "USERNAME", length = 30, nullable = false)

@@ -1,155 +1,191 @@
-:root{
-    --css-variable : #3CB371; 
-    --bagic-color : #3CB371;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+@font-face {
+    font-family: 'NanumBrushScript';
+    src: url('/font/NanumBrushScript-Regular.ttf') format('truetype');
 }
-.header{
-    background-color: var(--css-variable);
-    display: grid;
-    grid-template-columns: auto 1240px auto;
-    grid-template-rows: auto;
-}
-.headerCenter{
-    order: 2;
-    display: grid;
-    grid-auto-flow: column;
-}
-.menu{
-    > * {
-        font-size: 25px;
-        color: white;
-    }
-}
-.logo {
-    display: grid;
-    grid-template-columns: 50px 50px;
-    grid-template-rows: auto auto;
-    column-gap: 5px;
-    text-decoration: none;
-}
-.menuLogo {
-    height: 60px;
-    display: none;
-    position: relative;
-    z-index: 1002;
+
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
     background-color: var(--bagic-color);
+    color: white;
 }
-.menu > a {
-    text-decoration: none;
-    /* color: white; */
-}
-.logobtn:hover {
+
+.logo {
+    font-size: 40px;
+    font-weight: 800;
+    font-family: 'NanumBrushScript', cursive;
     cursor: pointer;
+    padding: 0 10px;
 }
 
-.comuMenus{
-    position: absolute;
-    background-color: white;
-    color: var(--bagic-color);
-    border: 1.5px dotted var(--bagic-color);
-    padding: 5px;
-    border-radius: 15px;
-    z-index: 1002;
+.menus_wrap {
+    flex-grow: 1;
+    display: flex;
 }
 
-/* 반응형 사이드 메뉴 */
-.sideMenus{
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    width: 0; height: 500px;
+.menus {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.menus span {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 0 30px;
+}
+
+.login {
     float: right;
-    transition: all 0.3s ease;
-    background-color: white;
-    border-bottom-left-radius: 30px;
-    
-}
-.sideMenus > * {
-    color: var(--bagic-color);
-    text-decoration: none;
-    font-size: 23px;
-    font-weight: bold;
-}
-.sideMenus p {
-    margin: 0;
-    padding: 10px 0;
-}
-.sideComuBtn:hover, .anyMenuList {
+    font-size: 20px;
+    padding: 0 20px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
-
-/* 스크린 사이즈에 따라 반응형 */
-@media screen and (max-width: 1239px) {
-    .menu{
-    }
-    .header {
-        grid-template-columns: auto;
-    }
+.hamberger_wrap {
+    display: none;
 }
+
+.commus {
+    position: relative;
+}
+
+.commu {
+    position: absolute;
+    visibility: hidden;
+    max-height: 0px;
+    left: 30px;
+    background-color: white;
+    font-size: 20px;
+    color: var(--bagic-color);
+    border: 1px solid var(--bagic-color);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.commu p {
+    cursor: pointer;
+    margin: 20px 10px;
+}
+
+/* 반응형 */
 @media screen and (max-width: 1023px) {
-    .menu{
+    .menus_wrap {
         display: none;
     }
-    .menuLogo {
-        height: 52px;
+
+    .hamberger_wrap {
         display: block;
-        float: right;
+        flex-grow: 1;
+        display: flex;
+        justify-content: right;
+        height: 100%;
     }
-    .sideMenus {
+
+    .hamberger {
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        background-color: var(--bagic-color);
+        z-index: 1002;
+        cursor: pointer;
+    }
+
+    .side_menus {
+        visibility: hidden;
+        width: 0px;
+        height: 600px;
+        float: right;
+        background-color: white;
+        color: var(--bagic-color);
+        font-size: 40px;
+        font-weight: 800;
+        position: fixed;
+        top: 70px;
+        z-index: 1002;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .side_login {
+        flex-grow: 1;
+        display: flex;
+        align-items: end;
+    }
+    .side_menus p {
+        margin: 0;
+        margin-bottom: 30px;
+    }
+    .llogin {
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .side_xBtn {
+        display: none;
+    }
+
+    .discomeon {
         display: block;
+    }
+
+    .discomedown {
+        display: none;
+    }
+    .side_commu {
+        visibility: hidden;
+        max-height: 0px;
+        white-space: nowrap;
+    }
+
+    .dark {
+        display: none;
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.5;
+    }
+
+    .dark_on {
+        display: block;
+        transition: opacity 0.3s ease;
     }
 }
 
-/* 애니메이션 설정 */
-@media screen and (max-width: 767px) {
-    .headerCenter {
-        /* grid-template-columns: 1fr; */
-    }
-}
-@keyframes logoAction {
-    0% { transform: rotate(0deg);}
-    33% { transform: rotate(-120deg);}
-    66% { transform: rotate(-240deg);}
-    100% { transform: rotate(-360deg); }
-}
-.logo > img {
-    animation: logoAction 2s infinite;
-}
-.downBtn {
-    transition: all 0.3s ease;
-}
-.turn-180 {
-    transform: rotate(-180deg);
-}
-.act {
-    display: none;
-    height: 0;
-    overflow: hidden;
-}
-.wowtest {
-    height: 100%;
-    > .sideComuMenus {
-        display: block;
-    }
-}
-.please {
-    transition: max-height 0.3s ease;
-    visibility: hidden;
-    max-height: 0;
-    background-color: whitesmoke;
-}
-.pleaseAct {
+/* toggle */
+.side_menus_toggle {
     visibility: visible;
+    transition: all 0.3s ease;
+    width: 500px;
+}
+
+.commu_toggle {
+    visibility: visible;
+    transition: all 0.3s ease;
     max-height: 300px;
 }
-.other {
+.turnM180 {
+    transform: rotate(-180deg);
     transition: all 0.3s ease;
 }
-.sideComuMenus {
-    opacity: 0;
-}
-.sideComuMenusAct {
-    transition: opacity 0.5s ease;
+.side_commu_toggle {
     visibility: visible;
-    opacity: 1;
+    max-height: 600px;
+    transition: all 0.3s ease;
+    border-top: 1px solid #9A9A9A;
+    border-bottom: 1px solid #9A9A9A;
+}
+.side_board_toggle {
+    margin-bottom: 0;
 }

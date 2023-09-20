@@ -1,3 +1,13 @@
+:root {
+    --bagic-color : #0073CF;
+}
 body{
     margin: 0px;
+}
+.wrap {
+    display: flex;
+    justify-content: center;
+}
+.contents {
+    width: 1200px;
 }
