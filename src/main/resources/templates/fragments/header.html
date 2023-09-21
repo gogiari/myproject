@@ -41,7 +41,8 @@
                     <p>홈</p>
                     <div style="display: flex;">
                         <p class="side_board">게시판</p>
-                        <box-icon class="downBtn" name='chevron-down' size="lg" type='solid' color='var(--bagic-color)'></box-icon>
+                        <box-icon class="downBtn" name='chevron-down' size="lg" type='solid'
+                            color='var(--bagic-color)'></box-icon>
                     </div>
                     <div class="side_commu"></div>
                     <p>채팅</p>
@@ -85,22 +86,29 @@
             document.querySelector('.commus').addEventListener('click', () => {
                 document.querySelector('.commu').classList.toggle('commu_toggle');
             });
-            
+
             // 어둡게 변하는 부분 클릭시(사이드메뉴 바깥)
             document.querySelector('.dark').addEventListener('click', () => {
                 document.querySelector('.hamberger').click();
                 document.querySelector('.side_board').click();
             });
-            
+
             document.querySelector('.side_board').addEventListener('click', () => {
                 document.querySelector('.downBtn').classList.toggle('turnM180');
                 document.querySelector('.side_commu').classList.toggle('side_commu_toggle');
                 document.querySelector('.side_board').classList.toggle('side_board_toggle');
             });
-            
+
             // 모든 클릭
             document.addEventListener('click', (e) => {
+                // document.querySelector('.commu')!!!!!!커뮤열려있으면 닫기해야함
+                const commuElement = document.querySelector('.commu');
+                const computedStyle = window.getComputedStyle(commuElement);
+                const visibility = computedStyle.getPropertyValue('visibility');
 
+                if (visibility === 'visible' && !commuElement.contains(e.target)) {
+                    document.querySelector('.commus').click();
+                }
             });
 
         </script>
