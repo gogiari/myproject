@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+    <div class="wrap">
+        <div class="contents">
+            <form action="/login" method="post">
+                <table>
+                    <tr>
+                        <td>아이디</td>
+                        <td><input type="text" name="userid" id=""></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="text" name="password" id=""></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input style="float: right;" type="submit" value="로그인">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" th:text="${message}"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

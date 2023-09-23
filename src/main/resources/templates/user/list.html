@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/common.css">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: black solid 1px;
+          
+        }
+        tr:hover {
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
     <header th:replace="~{fragments/header :: headerFragment}"></header>
-    <h1>유저리스트</h1>
-    <table>
-        <tr>
-            <td>아이디</td>
-            <td>이름</td>
-            <td>이메일</td>
-            <td>가입일</td>
-        </tr>
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.userid}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${#dates.format(user.indate, 'yy년 MM월 dd일 EEEE HH:mm:ss')}"></td>
-
-        </tr>
-    </table>
+    <div class="wrap">
+        <div class="contents">
+            <h1>유저리스트</h1>
+            <table>
+                <tr>
+                    <td>아이디</td>
+                    <td>이름</td>
+                    <td>이메일</td>
+                    <td>가입일</td>
+                </tr>
+                <tr th:each="user : ${userList}" th:onclick="|location.href='@{/user/edit(userid=${user.userid})}'|">
+                    <td th:text="${user.userid}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${#dates.format(user.indate, 'yy년 MM월 dd일 EEEE HH:mm:ss')}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 <script>
     
