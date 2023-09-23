@@ -11,5 +11,4 @@ public class DBConfig {
 
     @Value("${DB_PASSWORD}")
     private String dbPassword;
-    
 }

@@ -24,12 +24,16 @@
                 </div>
                 <span onclick="location.href='/chat/chatList'">채팅</span>
             </div>
-            <div class="login" onclick="location.href='/login'">로그인</div>
+            <!-- <div th:if="${session.userid == null}" class="login loginthe" onclick="location.href='/login'">로그인</div> -->
+            <!-- <div th:if="${session.userid != null}" class="login" onclick="location.href='/logout'">로그아웃</div> -->
+            <div class="login loginthe" onclick="location.href='/login'">로그인</div>
         </div>
 
         <!-- 반응형 768px 미만 -->
         <div class="hamberger_wrap">
-            <span class="llogin" onclick="location.href='/login'">로그인</span>
+            <!-- <span th:if="${session.userid == null}" class="llogin loginthe" onclick="location.href='/login'">로그인</span> -->
+            <!-- <span th:if="${session.userid != null}" class="llogin" onclick="location.href='/logout'">로그아웃</span> -->
+            <span  class="llogin loginthe" onclick="location.href='/login'">로그인</span>
             <div class="hamberger">
                 <box-icon id="ham" name='menu' color='white' size="lg" style="cursor: pointer;"></box-icon>
                 <box-icon class="side_xBtn" name='x' color="white" size="lg"></box-icon>
@@ -46,7 +50,9 @@
                     <p>채팅</p>
                 </div>
                 <div class="side_login">
-                    <p>로그인</p>
+                    <!-- <p class="loginthe" th:if="${session.userid == null}" onclick="location.href='/login'">로그인</p> -->
+                    <!-- <p th:if="${session.userid != null}" onclick="location.href='/logout'">로그아웃</p> -->
+                    <p class="loginthe" onclick="location.href='/login'">로그인</p>
                 </div>
             </div>
         </div>
@@ -108,7 +114,17 @@
                     document.querySelector('.commus').click();
                 }
             });
+        </script>
 
+        <!-- 로그인 됬을때 로그아웃으로 전환 -->
+        <script th:inline="javascript" th:if="${session.userid != null}">
+            document.querySelectorAll('.loginthe').forEach( (e) => {
+                e.textContent = '로그아웃';
+                e.addEventListener('click', () => {
+                    location.href = '/logout';
+                })
+            });
+            
         </script>
     </header>
 </body>

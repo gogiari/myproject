@@ -9,12 +9,59 @@
     <header th:replace="~{fragments/header :: headerFragment}"></header>
     <div class="wrap">
         <div class="contents">
-            <h1>안녕홈이양</h1>
-            <p>헤더작업중</p>
-            <a href="/user/list">회원목록</a>
-            <a href="/user/signUp">회원가입</a>
-            <p th:text="${session.userid}"></p>
+            <th:block th:if="${session.userid == 'admin'}">
+                <a href="/user/list">회원목록</a>
+                <a href="/user/signUp">회원가입</a>
+            </th:block>
+            <span>현재 최저 시급은 </span><span id="money"></span><span>원 입니다.</span>
+            <div>
+                <table>
+                    <tr>
+                        <td>시급</td>
+                        <td><input id="money2" type="number" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>하루 근무시간</td>
+                        <td><input class="alba_hour" type="number" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>일주일 근무 일수</td>
+                        <td><input class="alba_week" type="number" min="0"></td>
+                    </tr>
+                </table>
+                <span class="alba_result">0</span>
+            </div>
         </div>
     </div>
 </body>
+<script th:inline="javascript">
+    var servicekey = /*[[${servicekey}]]*/'';
+    fetch(`https://api.odcloud.kr/api/15068774/v1/uddi:21d816e5-6c44-4e30-903d-e98e30a4f227?serviceKey=${servicekey}`)
+    .then(resp => resp.json())
+    .then(result => {
+        console.log(result.data);
+        result.data.forEach(e => {
+            if(new Date().getFullYear() == e.연도){
+                document.querySelector('#money').textContent = e.시간급;
+                document.querySelector('#money2').value = e.시간급;
+            }
+        });
+    })
+    document.querySelector('#money2').addEventListener('input', (e) => {
+        hour_ex();
+    });
+    document.querySelector('.alba_hour').addEventListener('input', (e) => {
+        hour_ex();
+    });
+    document.querySelector('.alba_week').addEventListener('input', (e) => {
+        hour_ex();
+    });
+
+    function hour_ex() {
+        var result = document.querySelector('#money2').value
+            * document.querySelector('.alba_hour').value
+            * document.querySelector('.alba_week').value * 4.35;
+        document.querySelector('.alba_result').textContent = result.toLocaleString();
+    }
+</script>
 </html>

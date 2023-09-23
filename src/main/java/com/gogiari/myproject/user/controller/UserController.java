@@ -8,8 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,12 +58,18 @@ public class UserController {
         Optional<UserEntity> findUser = userRepository.findById(userid);
         UserEntity user = findUser.orElse(null);
 
-        if(user.getPassword().equals(password)){ // 아이디 잘못햇을때 동작안함수정해야함!@!!
-            session.setAttribute("userid", userid);
-        } else {
-            mv.setViewName("/login");
+        if( user ==  null || !user.getPassword().equals(password) ){
             mv.addObject("message", "아이디나 비밀번호를 다시 확인해주세요.");
+            mv.setViewName("redirect:/login");
+        } else if(user.getPassword().equals(password)){
+            session.setAttribute("userid", userid);
         }
         return mv;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
 }
