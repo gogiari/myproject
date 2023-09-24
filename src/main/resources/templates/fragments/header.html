@@ -12,10 +12,10 @@
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         <link rel="stylesheet" href="/css/common.css">
         <link rel="stylesheet" href="/css/header.css">
-        <div onclick="location.href='/'" class="logo">알바계산</div>
+        <div onclick=homeclick() class="logo">알바계산</div>
         <div class="menus_wrap">
             <div class="menus">
-                <span onclick="location.href='/'">홈</span>
+                <span onclick=homeclick()>홈</span>
                 <div style="position: relative;">
                     <div class="commus">
                         <span>게시판</span>
@@ -40,7 +40,7 @@
             </div>
             <div class="side_menus">
                 <div>
-                    <p>홈</p>
+                    <p onclick=homeclick()>홈</p>
                     <div style="display: flex;">
                         <p class="side_board">게시판</p>
                         <box-icon class="downBtn" name='chevron-down' size="lg" type='solid'
@@ -73,6 +73,7 @@
                         pElement.textContent = menu.menuname;
                         pElement2.textContent = menu.menuname;
                         pElement.onclick = () => { location.href = `/board/${menu.menuid}`; };
+                        pElement2.onclick = () => { location.href = `/board/${menu.menuid}`; };
                         commuDiv.appendChild(pElement);
                         sideCommuDiv.appendChild(pElement2);
                     });
@@ -81,7 +82,13 @@
             // 햄버거 클릭시
             document.querySelector('.hamberger').addEventListener('click', () => {
                 document.querySelector('.side_menus').classList.toggle('side_menus_toggle');
+                
+                // 사이드 메뉴 닫힐때 게시판 메뉴닫기
+                if(document.querySelector('.side_commu').className == 'side_commu side_commu_toggle'){
+                    document.querySelector('.side_commu').classList.remove('side_commu_toggle');
+                }
                 document.querySelector('.dark').classList.toggle('dark_on');
+                // 햄버거 버튼모양 바뀜
                 document.querySelector('#ham').classList.toggle('discomedown');
                 document.querySelector('.side_xBtn').classList.toggle('discomeon');
             });
@@ -114,6 +121,10 @@
                     document.querySelector('.commus').click();
                 }
             });
+
+            function homeclick() {
+                location.href = '/';
+            }
         </script>
 
         <!-- 로그인 됬을때 로그아웃으로 전환 -->

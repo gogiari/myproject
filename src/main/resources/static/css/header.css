@@ -112,6 +112,10 @@
         display: flex;
         flex-direction: column;
     }
+    
+    .side_menus p {
+        cursor: pointer;
+    }
 
     .side_login {
         flex-grow: 1;
@@ -167,7 +171,7 @@
 .side_menus_toggle {
     visibility: visible;
     transition: all 0.3s ease;
-    width: 500px;
+    width: 280px;
 }
 
 .commu_toggle {
