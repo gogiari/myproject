@@ -28,20 +28,21 @@
                 <table>
                     <tr>
                         <td>시급</td>
-                        <td><input id="money2" oninput="hour_ex()" type="number" min="0"></td>
+                        <td><input id="money2" oninput="alba_cal()" type="number" min="0"></td>
                     </tr>
                     <tr>
                         <td>
                             <select id="alba_select">
                                 <option value="0">하루 근무 시간</option>
                                 <option value="1">일주일 근무 시간</option>
+                                <option value="2">한달 근무 시간</option>
                             </select>
                         </td>
-                        <td><input oninput="hour_ex()" class="alba_hour" type="number" min="0"></td>
+                        <td><input oninput="alba_cal()" class="alba_hour" type="number" min="0"></td>
                     </tr>
                     <tr class="week_work">
                         <td>일주일 근무 일수</td>
-                        <td><input oninput="hour_ex()" class="alba_week" type="number" min="0"></td>
+                        <td><input oninput="alba_cal()" class="alba_week" type="number" min="0"></td>
                     </tr>
                 </table>
                 <span>예상 월급은 </span><span class="alba_result">0</span><span>원 입니다.</span>
@@ -71,25 +72,34 @@
             document.querySelector('#money2').value = e.시간급;
         }
     });
-    document.querySelector('#alba_select').addEventListener('change', e => {
-        if (document.querySelector('#alba_select').options.selectedIndex == 1) {
+    document.querySelector('#alba_select').addEventListener('change', () => {
+        if (document.querySelector('#alba_select').options.selectedIndex == 1 || 
+        document.querySelector('#alba_select').options.selectedIndex == 2) {
             document.querySelector('.week_work').hidden = true;
-            hour_ex();
+            alba_cal();
         } else {
             document.querySelector('.week_work').hidden = false;
-            hour_ex();
+            alba_cal();
         }
     });
 
-    function hour_ex() {
-        if (document.querySelector('.week_work').hidden == true) {
+    function alba_cal() {
+        var alba_sel = document.querySelector('#alba_select').selectedIndex;
+        // 일주일
+        if (alba_sel == 1) {
             var result = document.querySelector('#money2').value
                 * document.querySelector('.alba_hour').value * 4.345;
             document.querySelector('.alba_result').textContent = result.toLocaleString();
-        } else {
+            // 하루
+        } else if(alba_sel == 0) {
             var result = document.querySelector('#money2').value
                 * document.querySelector('.alba_hour').value
                 * document.querySelector('.alba_week').value * 4.345;
+            document.querySelector('.alba_result').textContent = result.toLocaleString();
+            // 한달
+        } else if (alba_sel == 2) {
+            var result = document.querySelector('#money2').value
+                * document.querySelector('.alba_hour').value
             document.querySelector('.alba_result').textContent = result.toLocaleString();
         }
     }
