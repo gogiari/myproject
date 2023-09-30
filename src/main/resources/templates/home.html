@@ -73,14 +73,12 @@
         }
     });
     document.querySelector('#alba_select').addEventListener('change', () => {
-        if (document.querySelector('#alba_select').options.selectedIndex == 1 || 
-        document.querySelector('#alba_select').options.selectedIndex == 2) {
-            document.querySelector('.week_work').hidden = true;
-            alba_cal();
-        } else {
+        if (document.querySelector('#alba_select').options.selectedIndex == 0) {
             document.querySelector('.week_work').hidden = false;
-            alba_cal();
+        } else {
+            document.querySelector('.week_work').hidden = true;
         }
+        alba_cal();
     });
 
     function alba_cal() {
