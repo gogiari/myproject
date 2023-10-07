@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${user.userid}"></title>
+    <title th:text="|${user.userid}님의 회원수정|"></title>
 </head>
+
 <body>
-    <p th:text="${user}"></p>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+    <div class="wrap">
+        <div class="contents">
+            <form action="/user/edit" method="post">
+                <table>
+                    <tr>
+                    <td>아이디</td>
+                    <td><input type="text" name="userid" id="userid" th:placeholder="${user.userid}"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="text" name="password" id="password" th:placeholder="${user.password}"></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="username" id="username" th:placeholder="${user.username}"></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="text" name="email" id="email" th:placeholder="${user.email}"></td>
+                </tr>
+            </table>
+            <input type="submit" value="헤헤" onclick=wow()>
+        </form>
+        </div>
+    </div>
 </body>
+<script>
+</script>
+
 </html>

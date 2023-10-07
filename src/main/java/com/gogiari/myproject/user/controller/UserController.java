@@ -50,12 +50,18 @@ public class UserController {
     }
     @ResponseBody
     @GetMapping("/user/edit")
-    public ModelAndView edit(String userid){
+    public ModelAndView editForm(String userid){
         ModelAndView mv = new ModelAndView();
         Optional<UserEntity> findUser = userRepository.findById(userid);
         UserEntity user = findUser.orElse(null);
         System.out.println(user);
         mv.addObject("user", user);
+        return mv;
+    }
+    @PatchMapping("/user/edit")
+    public ModelAndView edit(UserEntity userEntity){
+        ModelAndView mv = new ModelAndView("redirect:/");
+        System.out.println(userEntity);
         return mv;
     }
 
