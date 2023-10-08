@@ -59,7 +59,6 @@ public class UserController {
     @PostMapping("/user/edit")
     public ModelAndView edit(UserEntity userEntity){
         ModelAndView mv = new ModelAndView("redirect:/user/list");
-        System.out.println("<"+userEntity.getEmail()+">");
 
         String userid = userEntity.getUserid();
         Optional<UserEntity> findUser = userRepository.findById(userid);
