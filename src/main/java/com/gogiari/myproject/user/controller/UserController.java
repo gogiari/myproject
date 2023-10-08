@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,13 +53,27 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
         Optional<UserEntity> findUser = userRepository.findById(userid);
         UserEntity user = findUser.orElse(null);
-        System.out.println(user);
         mv.addObject("user", user);
         return mv;
     }
-    @PatchMapping("/user/edit")
+    @PostMapping("/user/edit")
     public ModelAndView edit(UserEntity userEntity){
-        ModelAndView mv = new ModelAndView("redirect:/");
+        ModelAndView mv = new ModelAndView("redirect:/user/list");
+        System.out.println("<"+userEntity.getEmail()+">");
+
+        String userid = userEntity.getUserid();
+        Optional<UserEntity> findUser = userRepository.findById(userid);
+        UserEntity user = findUser.orElse(null);
+
+        userEntity.setIndate(user.getIndate());
+        //if null or "".trim()넣어서 조건문만들면됨
+        userEntity.setPassword(user.getPassword());
+        userEntity.setUsername(user.getUsername());
+        userEntity.setEmail(user.getEmail());
+
+        
+
+        // userRepository.save(userid);
         System.out.println(userEntity);
         return mv;
     }
