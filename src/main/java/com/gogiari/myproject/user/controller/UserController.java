@@ -66,14 +66,18 @@ public class UserController {
 
         userEntity.setIndate(user.getIndate());
         //if null or "".trim()넣어서 조건문만들면됨
-        userEntity.setPassword(user.getPassword());
-        userEntity.setUsername(user.getUsername());
-        userEntity.setEmail(user.getEmail());
+        if(userEntity.getPassword() == null || userEntity.getPassword().trim() == ""){
+            userEntity.setPassword(user.getPassword());
+        }
+        if(userEntity.getUsername() == null || userEntity.getUsername().trim() == ""){
+            userEntity.setUsername(user.getUsername());
+        }
+        if(userEntity.getEmail() == null || userEntity.getEmail().trim() == ""){
+            userEntity.setEmail(user.getEmail());
+        }
 
-        
-
-        // userRepository.save(userid);
-        System.out.println(userEntity);
+        userRepository.save(userEntity);
+        // System.out.println(userEntity);
         return mv;
     }
 
