@@ -42,6 +42,7 @@
     function userDelete() {
         if(confirm('하하하')){
             location.href = '/user/delete?userid=[(${user.userid})]';
+            // post로 fetch로 해볼것
         }else {
             alert('취소를 선택하셨습니다.')
         }
